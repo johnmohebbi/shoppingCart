@@ -29,7 +29,7 @@ const reducer = (state,action) =>{
                 checkout:false,
             }
         case 'REMOVE_ITEM':
-            const newSelectedProducts = state.filter(item => item.id !== action.payLoad.id);
+            const newSelectedProducts = state.selectedProducts.filter(item => item.id !== action.payLoad.id);
             return {
                 ...state,
                 selectedProducts:[...newSelectedProducts],
@@ -41,14 +41,14 @@ const reducer = (state,action) =>{
             state.selectedProducts[indexI].quantity++;
             return {
                 ...state,
-                ...sumInCart(newSelectedProducts),
+                ...sumInCart(state.selectedProducts),
             }
         case 'DECREASE':
             const indexD = state.selectedProducts.findIndex(item => item.id === action.payLoad.id);
             state.selectedProducts[indexD].quantity--;
             return {
                 ...state,
-                ...sumInCart(newSelectedProducts),
+                ...sumInCart(state.selectedProducts),
             }
         case 'CHECKOUT':
            return {
