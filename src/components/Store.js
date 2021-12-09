@@ -3,6 +3,7 @@ import React,{ useContext } from 'react';
 import Product from './shared/Product';
 //context
 import { ProductsContext } from '../context/ProductsContextProvider';
+
 const Store = () => {
     const productsData = useContext(ProductsContext);
     
