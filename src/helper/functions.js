@@ -12,5 +12,5 @@ const quantityCounter = (selectedProduct,id) => {
 }
 export {
     shorten,
-    quantityCounter
+    quantityCounter,
 }

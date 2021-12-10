@@ -7,13 +7,13 @@ import { CartContext } from '../../context/CartContextProvider';
 const Product = ({productData}) => {
     const {title,price,image,id} =productData;
     const {state,dispatch} = useContext(CartContext);
-    
+
     return (
         <div>
             <img src={image} alt="Product" width='200px' />
             <h3>{shorten(title)}</h3>
             <p>{price}</p>
-            <Link to="/details">Details</Link>
+            <Link to={`/products/${id}`}>Details</Link>
             {
                 quantityCounter(state.selectedProducts,id) >= 1 ?
             <button onClick={()=> dispatch({type:"INCREASE",payLoad:productData})}>+</button>:
