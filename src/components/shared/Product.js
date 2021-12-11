@@ -23,8 +23,8 @@ const Product = ({productData}) => {
                 <div>
                 {quantityCounter(state.selectedProducts,id) === 1 &&
                 <button onClick={()=> dispatch({type:"REMOVE_ITEM",payLoad:productData})}>remove</button>
-                
-                }
+            }
+            {quantityCounter(state.selectedProducts,id) && <span>{quantityCounter(state.selectedProducts,id)}</span>}
                 {quantityCounter(state.selectedProducts,id) > 1 &&
                     <button onClick={()=> dispatch({type:"DECREASE",payLoad:productData})}>-</button>
                 }
