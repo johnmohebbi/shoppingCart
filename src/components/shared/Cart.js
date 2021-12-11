@@ -11,7 +11,7 @@ const Cart = () => {
         <div>
 
          {
-           state.selectedProducts&& state.selectedProducts.map(selectProduct => {
+           state.selectedProducts&&  state.selectedProducts.map(selectProduct => {
                return (
                 <div>
                     <img src={selectProduct.image} alt="" width='85px'/>
