@@ -9,7 +9,6 @@ const Details = () => {
     const {id} = useParams()
     const products = useContext(ProductsContext);
     const dataProduct = products[id - 1]
-    console.log(dataProduct);
     return (
         <div>
             

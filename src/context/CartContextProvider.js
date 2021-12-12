@@ -8,7 +8,7 @@ const initialState = {
 }
 const sumInCart = (selectedProducts) =>{
     const productsCounter = selectedProducts.reduce((total,product)=>total + product.quantity,0);
-    const total = selectedProducts.reduce((total,product)=>total + (product.quantity * product.price),0);
+    const total = selectedProducts.reduce((total,product)=>total + (product.quantity * product.price),0).toFixed(2);
     return {productsCounter,total};
 }
 const reducer = (state,action) =>{

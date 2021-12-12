@@ -7,8 +7,7 @@ import { CartContext } from '../context/CartContextProvider';
 
 const Store = () => {
     const productsData = useContext(ProductsContext);
-    const {state} = useContext(CartContext);
-    console.log(state.selectedProducts);
+        
     return (
         <div style={{display:"flex",flexWrap:"Wrap", justifyContent:"space-around"}}>
             {
