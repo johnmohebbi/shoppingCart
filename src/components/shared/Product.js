@@ -4,6 +4,8 @@ import { Link } from 'react-router-dom';
 import { shorten,quantityCounter } from '../../helper/functions';
 //context
 import { CartContext } from '../../context/CartContextProvider';
+//icons 
+import Trash from "../../asset/icons/trash.svg"
 const Product = ({productData}) => {
     const {title,price,image,id} =productData;
     const {state,dispatch} = useContext(CartContext);
@@ -22,7 +24,7 @@ const Product = ({productData}) => {
             
                 <div>
                 {quantityCounter(state.selectedProducts,id) === 1 &&
-                <button onClick={()=> dispatch({type:"REMOVE_ITEM",payLoad:productData})}>remove</button>
+                <button onClick={()=> dispatch({type:"REMOVE_ITEM",payLoad:productData})}><img src={Trash} alt="Trash" /></button>
             }
             {quantityCounter(state.selectedProducts,id) && <span>{quantityCounter(state.selectedProducts,id)}</span>}
                 {quantityCounter(state.selectedProducts,id) > 1 &&
