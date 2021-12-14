@@ -1,29 +1,31 @@
 import React,{ useContext } from 'react';
 import { Link } from 'react-router-dom';
 //functions
-import {shorten} from "../../helper/functions"
+import {shorten} from "../../helper/functions";
+//context
 import { CartContext } from '../../context/CartContextProvider';
 //icons
-import trash from '../../asset/icons/trash.svg'
+import trash from '../../asset/icons/trash.svg';
+//css
+import styles from './styles/cart.module.css'
 const Cart = () => {
     const {state,dispatch} = useContext(CartContext);
 
     return (
-        <div>
-
+        <div className={styles.cartContainer}>
+            <section className={styles.sectionProducts}>
         {
            state.selectedProducts &&  state.selectedProducts.map(selectProduct => {
                return (
-                <div>
-                    <img src={selectProduct.image} alt="" width='85px'/>
-                    <h2>{shorten(selectProduct.title)}</h2>
-                    <p>{selectProduct.price}</p>
-                    <p>{selectProduct.quantity}</p>
-                    <div>
-                    <button onClick={()=> dispatch({type:"INCREASE",payLoad:selectProduct})}>+</button>
-                    {selectProduct.quantity === 1 && <button onClick={()=> dispatch({type:"REMOVE_ITEM",payLoad:selectProduct})}><img src={trash} alt="trash" /></button>}
-                    {selectProduct.quantity > 1 && <button onClick={()=> dispatch({type:"DECREASE",payLoad:selectProduct})}>-</button>}
-
+                <div className={styles.selectedProduct}>
+                    <img className={styles.productImage} src={selectProduct.image} alt="product"/>
+                    <h2 className={styles.cartTitle}>{shorten(selectProduct.title)}</h2>
+                    <p className={styles.cartPrice}>{selectProduct.price}</p>
+                    <p className={styles.cartQuantity}>{selectProduct.quantity}</p>
+                    <div className={styles.cartBtns}>
+                    <button className={styles.cartIncrease} onClick={()=> dispatch({type:"INCREASE",payLoad:selectProduct})}>+</button>
+                    {selectProduct.quantity === 1 && <button className={styles.cartRemove} onClick={()=> dispatch({type:"REMOVE_ITEM",payLoad:selectProduct})}><img src={trash} alt="trash" /></button>}
+                    {selectProduct.quantity > 1 && <button className={styles.cartDecrease} onClick={()=> dispatch({type:"DECREASE",payLoad:selectProduct})}>-</button>}
                     </div>
                 </div>
                 
@@ -31,31 +33,36 @@ const Cart = () => {
              
             })
         }
-           {
-            state.productsCounter > 0 &&   
-            <div>
-               <p><span>total items:</span>{state.productsCounter}</p>
-               <p><span>total payments:</span> {state.total}</p>
-               <div>
-                   <button onClick={()=>dispatch({type:"CHECKOUT"})}>Checkout</button>
-                   <button onClick={()=>dispatch({type:"CLEAR"})}>clear</button>
-               </div>
-            </div>
-           }
-           {
-            state.checkout && 
-            <div>
-                <h3>check out successfully</h3>
-                <Link to="/products">got to Store</Link>
-            </div>
+        </section>
+           <section className={styles.totalContainer}>
+            {
+                state.productsCounter > 0 &&   
+                <div className={styles.counterCountainer}>
+                    <div className={styles.sectionItemsAndPayments}>
+                    <p className={styles.items}>total items: <span>{state.productsCounter}</span></p>
+                    <p className={styles.payments}>total payments: <span>{state.total}</span></p>
+                    </div>
+                    <div className={styles.sectionBtnsInTotalCounter}>
+                        <button className={styles.ClearBtn} onClick={()=>dispatch({type:"CLEAR"})}>Clear</button>
+                        <button className={styles.CheckoutBtn} onClick={()=>dispatch({type:"CHECKOUT"})}>Checkout</button>
+                    </div>
+                </div>
             }
             {
-            !state.checkout && state.productsCounter === 0 &&
-            <div>
-                <h3>your cart is empty.</h3>
-                <Link to="/products">got to Store</Link>
-            </div>
-            }
+                state.checkout && 
+                <div>
+                    <h3 className={styles.titleMessege}>checkOut successfully</h3>
+                    <Link className={styles.goStore} to="/products">got to Store</Link>
+                </div>
+                }
+                {
+                !state.checkout && state.productsCounter === 0 &&
+                <div>
+                    <h3 className={styles.titleMessege}>your cart is empty.</h3>
+                    <Link className={styles.goStore} to="/products">go to Store</Link>
+                </div>
+                }
+           </section>
         </div>
     );
 };
