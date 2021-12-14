@@ -6,7 +6,9 @@
     align-items: center;
     padding-left:1.1rem ;
     padding-right:1.1rem ;
-    background-color: #edf2f4;
+    background-color: #ecf8ff;
+    position: fixed;
+    top: 0;
 }
 .container a {
     text-decoration: none;
