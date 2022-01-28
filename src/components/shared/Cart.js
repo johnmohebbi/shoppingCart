@@ -1,15 +1,17 @@
-import React,{ useContext } from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
 //functions
 import {shorten} from "../../helper/functions";
-//context
-import { CartContext } from '../../context/CartContextProvider';
+//redux 
+import { useSelector,useDispatch } from 'react-redux';
 //icons
 import trash from '../../asset/icons/trash.svg';
 //css
 import styles from './styles/cart.module.css'
 const Cart = () => {
-    const {state,dispatch} = useContext(CartContext);
+    const state = useSelector(state => state.cartState);
+    const dispatch = useDispatch();
+
 
     return (
         <div className={styles.cartContainer}>
@@ -17,10 +19,10 @@ const Cart = () => {
         {
            state.selectedProducts &&  state.selectedProducts.map(selectProduct => {
                return (
-                <div className={styles.selectedProduct}>
+                <div className={styles.selectedProduct} key={selectProduct.id}>
                     <img className={styles.productImage} src={selectProduct.image} alt="product"/>
                     <h2 className={styles.cartTitle}>{shorten(selectProduct.title)}</h2>
-                    <p className={styles.cartPrice}>{selectProduct.price}</p>
+                    <p className={styles.cartPrice}>{selectProduct.price}$</p>
                     <p className={styles.cartQuantity}>{selectProduct.quantity}</p>
                     <div className={styles.cartBtns}>
                     <button className={styles.cartIncrease} onClick={()=> dispatch({type:"INCREASE",payLoad:selectProduct})}>+</button>
